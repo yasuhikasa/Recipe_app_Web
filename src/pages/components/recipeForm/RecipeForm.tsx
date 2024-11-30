@@ -285,11 +285,12 @@ const RecipeFormExtended = () => {
             {/* 使いたい食材 */}
             <TextField
               fullWidth
+              multiline
               label="使いたい食材 🥕"
               name="preferredIngredients"
               value={formData.preferredIngredients}
               onChange={handleInputChange}
-              placeholder="例: 鶏肉, トマト"
+              placeholder="例: 鶏肉, トマト　（50文字以内）"
               inputProps={{ maxLength: 50 }}
               sx={{ mb: 2 }}
             />
@@ -297,11 +298,12 @@ const RecipeFormExtended = () => {
             {/* 避けたい食材 */}
             <TextField
               fullWidth
+              multiline
               label="避けたい食材 🚫"
               name="avoidedIngredients"
               value={formData.avoidedIngredients}
               onChange={handleInputChange}
-              placeholder="例: パクチー, ナス"
+              placeholder="例: パクチー, ナス　（50文字以内）"
               inputProps={{ maxLength: 50 }}
               sx={{ mb: 2 }}
             />
@@ -309,11 +311,12 @@ const RecipeFormExtended = () => {
             {/* その他特記事項 */}
             <TextField
               fullWidth
+              multiline
               label="その他特記事項 ✍️"
               name="additionalNotes"
               value={formData.additionalNotes}
               onChange={handleInputChange}
-              placeholder="例: 油控えめで"
+              placeholder="例: 油控えめで　（50文字以内）"
               inputProps={{ maxLength: 50 }}
             />
           </Grid>
