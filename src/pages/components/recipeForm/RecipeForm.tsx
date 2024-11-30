@@ -12,14 +12,18 @@ import {
   Typography,
   Grid,
 } from "@mui/material";
-import { SelectChangeEvent } from '@mui/material';
-import { moodOptions, cookingTimeOptions, effortOptions, purposeOptions, seasonOptions } from "../../../utils/options";
+import { SelectChangeEvent } from "@mui/material";
+import {
+  moodOptions,
+  cookingTimeOptions,
+  effortOptions,
+  seasonOptions,
+} from "../../../utils/options";
 
 type FormData = {
   mood: string;
   time: string;
   effort: string[];
-  purpose: string;
   season: string[];
 };
 
@@ -28,7 +32,6 @@ const RecipeFormExtended = () => {
     mood: "",
     time: "",
     effort: [],
-    purpose: "",
     season: [],
   });
 
@@ -36,17 +39,17 @@ const RecipeFormExtended = () => {
     const { name, value } = event.target;
     setFormData((prev) => ({
       ...prev,
-      [name as keyof FormData]: value,
+      [name]: value,
     }));
   };
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, checked } = e.target;
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, checked } = event.target;
     setFormData((prev) => {
       const updatedValues = checked
         ? [...(prev[name as keyof FormData] as string[]), value]
         : (prev[name as keyof FormData] as string[]).filter((item) => item !== value);
-      return { ...prev, [name as keyof FormData]: updatedValues };
+      return { ...prev, [name]: updatedValues };
     });
   };
 
@@ -103,23 +106,23 @@ const RecipeFormExtended = () => {
             </FormControl>
           </Grid>
 
-          {/* 時間セクション */}
+          {/* 調理時間セクション */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
-              <InputLabel id="time-label">調理時間🍳</InputLabel>
+              <InputLabel id="time-label">調理時間⏰</InputLabel>
               <Select
-  labelId="mood-label"
-  id="mood"
-  name="mood"
-  value={formData.mood}
-  onChange={handleSelectChange}
->
-  {moodOptions.map((option) => (
-    <MenuItem key={option.value} value={option.value}>
-      {option.label}
-    </MenuItem>
-  ))}
-</Select>
+                labelId="time-label"
+                id="time"
+                name="time"
+                value={formData.time}
+                onChange={handleSelectChange}
+              >
+                {cookingTimeOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
             </FormControl>
           </Grid>
 
