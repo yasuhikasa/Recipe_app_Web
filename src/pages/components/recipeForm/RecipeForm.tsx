@@ -22,6 +22,9 @@ import {
   genreOptions,
   purposeOptions,
   budgetOptions,
+  peopleOptions,
+  preferenceOptions,
+  cookingGenreOptions,
 } from "../../../utils/options";
 
 type FormData = {
@@ -36,6 +39,9 @@ type FormData = {
   preferredIngredients: string; // 使いたい食材
   avoidedIngredients: string;  // 避けたい食材
   additionalNotes: string;     // その他特記事項
+  people: string; // 人数
+  preference: string; // 趣向
+  cookingGenre: string; // 料理ジャンル
 };
 
 const RecipeFormExtended = () => {
@@ -51,6 +57,9 @@ const RecipeFormExtended = () => {
     preferredIngredients: "",
     avoidedIngredients: "",
     additionalNotes: "",
+    people: "", // 人数
+  preference: "", // 趣向
+  cookingGenre: "", // 料理ジャンル
   });
 
   const handleSelectChange = (event: SelectChangeEvent) => {
@@ -174,10 +183,10 @@ const RecipeFormExtended = () => {
             </FormControl>
           </Grid>
 
-          {/* ジャンルセクション */}
+          {/* 国ジャンルセクション */}
           <Grid item xs={12} sm={6}>
             <FormControl fullWidth>
-              <InputLabel id="genre-label">ジャンル🌏</InputLabel>
+              <InputLabel id="genre-label">国ジャンル🌏</InputLabel>
               <Select
                 labelId="genre-label"
                 id="genre"
@@ -193,6 +202,26 @@ const RecipeFormExtended = () => {
               </Select>
             </FormControl>
           </Grid>
+
+            {/* 料理ジャンルセクション */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <InputLabel id="cooking-genre-label">料理ジャンル🍲</InputLabel>
+      <Select
+        labelId="cooking-genre-label"
+        id="cookingGenre"
+        name="cookingGenre"
+        value={formData.cookingGenre}
+        onChange={handleSelectChange}
+      >
+        {cookingGenreOptions.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  </Grid>
 
           {/* 目的セクション */}
           <Grid item xs={12} sm={6}>
@@ -233,6 +262,48 @@ const RecipeFormExtended = () => {
               </Select>
             </FormControl>
           </Grid>
+
+
+  {/* 人数セクション */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <InputLabel id="people-label">人数👨‍👩‍👧‍👦</InputLabel>
+      <Select
+        labelId="people-label"
+        id="people"
+        name="people"
+        value={formData.people}
+        onChange={handleSelectChange}
+      >
+        {peopleOptions.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  </Grid>
+
+  {/* 趣向セクション */}
+  <Grid item xs={12} sm={6}>
+    <FormControl fullWidth>
+      <InputLabel id="preference-label">趣向🍽️</InputLabel>
+      <Select
+        labelId="preference-label"
+        id="preference"
+        name="preference"
+        value={formData.preference}
+        onChange={handleSelectChange}
+      >
+        {preferenceOptions.map((option) => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
+  </Grid>
+
 
           {/* 手間セクション */}
           <Grid item xs={12}>

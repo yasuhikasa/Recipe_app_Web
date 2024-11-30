@@ -103,7 +103,7 @@ export const mealTimeOptions: Option[] = [
   { label: "夜食", value: "夜食" },
 ];
 
-// ジャンル
+// 国ジャンル
 export const genreOptions: Option[] = [
   { label: "和食", value: "和食" },
   { label: "中華", value: "中華" },
@@ -113,4 +113,32 @@ export const genreOptions: Option[] = [
   { label: "アジアン", value: "アジアン" },
   { label: "エスニック", value: "エスニック" },
   { label: "アメリカン", value: "アメリカン" },
+];
+
+// 料理ジャンル
+export const cookingGenreOptions: Option[] = [
+  { label: "鍋物", value: "鍋物" },
+  { label: "スイーツ", value: "スイーツ" },
+  { label: "ケーキ", value: "ケーキ" },
+  { label: "煮物", value: "煮物" },
+  { label: "炒め物", value: "炒め物" },
+  { label: "揚げ物", value: "揚げ物" },
+  { label: "蒸し物", value: "蒸し物" },
+  { label: "汁物", value: "汁物" },
+];
+
+// 人数
+export const peopleOptions: Option[] = [
+  { label: "1人分", value: "1人分" },
+  { label: "2人分", value: "2人分" },
+  { label: "3〜4人分", value: "3〜4人分" },
+  { label: "5人以上", value: "5人以上" },
+];
+
+// 趣向
+export const preferenceOptions: Option[] = [
+  { label: "野菜多め", value: "野菜多め" },
+  { label: "お肉多め", value: "お肉多め" },
+  { label: "魚料理中心", value: "魚料理中心" },
+  { label: "炭水化物メイン", value: "炭水化物メイン" },
 ];
