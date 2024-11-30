@@ -18,21 +18,39 @@ import {
   cookingTimeOptions,
   effortOptions,
   seasonOptions,
+  mealTimeOptions,
+  genreOptions,
+  purposeOptions,
+  budgetOptions,
 } from "../../../utils/options";
 
 type FormData = {
   mood: string;
   time: string;
+  mealTime: string;
+  genre: string;
+  budget: string;
+  purpose: string;
   effort: string[];
   season: string[];
+  preferredIngredients: string; // 使いたい食材
+  avoidedIngredients: string;  // 避けたい食材
+  additionalNotes: string;     // その他特記事項
 };
 
 const RecipeFormExtended = () => {
   const [formData, setFormData] = useState<FormData>({
     mood: "",
     time: "",
+    mealTime: "",
+    genre: "",
+    purpose: "",
+    budget: "",
     effort: [],
     season: [],
+    preferredIngredients: "",
+    avoidedIngredients: "",
+    additionalNotes: "",
   });
 
   const handleSelectChange = (event: SelectChangeEvent) => {
@@ -51,6 +69,16 @@ const RecipeFormExtended = () => {
         : (prev[name as keyof FormData] as string[]).filter((item) => item !== value);
       return { ...prev, [name]: updatedValues };
     });
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -126,6 +154,86 @@ const RecipeFormExtended = () => {
             </FormControl>
           </Grid>
 
+          {/* 食べる時間帯セクション */}
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel id="meal-time-label">食べる時間帯🍽️</InputLabel>
+              <Select
+                labelId="meal-time-label"
+                id="mealTime"
+                name="mealTime"
+                value={formData.mealTime}
+                onChange={handleSelectChange}
+              >
+                {mealTimeOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+          {/* ジャンルセクション */}
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel id="genre-label">ジャンル🌏</InputLabel>
+              <Select
+                labelId="genre-label"
+                id="genre"
+                name="genre"
+                value={formData.genre}
+                onChange={handleSelectChange}
+              >
+                {genreOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+          {/* 目的セクション */}
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel id="purpose-label">目的💪</InputLabel>
+              <Select
+                labelId="purpose-label"
+                id="purpose"
+                name="purpose"
+                value={formData.purpose}
+                onChange={handleSelectChange}
+              >
+                {purposeOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
+          {/* 予算セクション */}
+          <Grid item xs={12} sm={6}>
+            <FormControl fullWidth>
+              <InputLabel id="budget-label">予算💰</InputLabel>
+              <Select
+                labelId="budget-label"
+                id="budget"
+                name="budget"
+                value={formData.budget}
+                onChange={handleSelectChange}
+              >
+                {budgetOptions.map((option) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
           {/* 手間セクション */}
           <Grid item xs={12}>
             <Typography variant="h6" sx={{ color: "#555" }}>
@@ -167,6 +275,49 @@ const RecipeFormExtended = () => {
               />
             ))}
           </Grid>
+
+          {/* テキストフィールドセクション */}
+          <Grid item xs={12}>
+            <Typography variant="h6" sx={{ color: "#555", mb: 2 }}>
+              詳細設定
+            </Typography>
+
+            {/* 使いたい食材 */}
+            <TextField
+              fullWidth
+              label="使いたい食材 🥕"
+              name="preferredIngredients"
+              value={formData.preferredIngredients}
+              onChange={handleInputChange}
+              placeholder="例: 鶏肉, トマト"
+              inputProps={{ maxLength: 50 }}
+              sx={{ mb: 2 }}
+            />
+
+            {/* 避けたい食材 */}
+            <TextField
+              fullWidth
+              label="避けたい食材 🚫"
+              name="avoidedIngredients"
+              value={formData.avoidedIngredients}
+              onChange={handleInputChange}
+              placeholder="例: パクチー, ナス"
+              inputProps={{ maxLength: 50 }}
+              sx={{ mb: 2 }}
+            />
+
+            {/* その他特記事項 */}
+            <TextField
+              fullWidth
+              label="その他特記事項 ✍️"
+              name="additionalNotes"
+              value={formData.additionalNotes}
+              onChange={handleInputChange}
+              placeholder="例: 油控えめで"
+              inputProps={{ maxLength: 50 }}
+            />
+          </Grid>
+
 
           {/* 提出ボタン */}
           <Grid item xs={12}>
