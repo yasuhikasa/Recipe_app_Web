@@ -13,6 +13,7 @@ import {
   Grid,
 } from "@mui/material";
 import { SelectChangeEvent } from "@mui/material";
+import axios from "axios";
 import {
   moodOptions,
   cookingTimeOptions,
@@ -26,7 +27,9 @@ import {
   preferenceOptions,
   cookingGenreOptions,
 } from "../../../utils/options";
+import RecipeModal from "./RecipeModal";
 
+// 型定義
 type FormData = {
   mood: string;
   time: string;
@@ -37,8 +40,8 @@ type FormData = {
   effort: string[];
   season: string[];
   preferredIngredients: string; // 使いたい食材
-  avoidedIngredients: string;  // 避けたい食材
-  additionalNotes: string;     // その他特記事項
+  avoidedIngredients: string; // 避けたい食材
+  additionalNotes: string; // その他特記事項
   people: string; // 人数
   preference: string; // 趣向
   cookingGenre: string; // 料理ジャンル
@@ -57,12 +60,16 @@ const RecipeFormExtended = () => {
     preferredIngredients: "",
     avoidedIngredients: "",
     additionalNotes: "",
-    people: "", // 人数
-  preference: "", // 趣向
-  cookingGenre: "", // 料理ジャンル
+    people: "",
+    preference: "",
+    cookingGenre: "",
   });
 
-  const handleSelectChange = (event: SelectChangeEvent) => {
+  const [generatedRecipe, setGeneratedRecipe] = useState<string | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
+  // セレクトボックスの変更ハンドラー
+  const handleSelectChange = (event: SelectChangeEvent<string>) => {
     const { name, value } = event.target;
     setFormData((prev) => ({
       ...prev,
@@ -70,6 +77,7 @@ const RecipeFormExtended = () => {
     }));
   };
 
+  // チェックボックスの変更ハンドラー
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = event.target;
     setFormData((prev) => {
@@ -80,6 +88,7 @@ const RecipeFormExtended = () => {
     });
   };
 
+  // テキストフィールドの変更ハンドラー
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -90,9 +99,33 @@ const RecipeFormExtended = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // フォーム送信
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Submitted Data:", formData);
+    try {
+      const response = await axios.post("/api/ai-recipe", formData);
+      setGeneratedRecipe(response.data.recipe);
+      setModalOpen(true);
+    } catch (error) {
+      console.error("Error generating recipe:", error);
+    }
+  };
+
+  // レシピ保存
+  const handleSave = async () => {
+    try {
+      await axios.post("/api/save-recipe", { recipe: generatedRecipe, formData });
+      alert("レシピが保存されました！");
+      setModalOpen(false);
+    } catch (error) {
+      console.error("Error saving recipe:", error);
+      alert("レシピの保存中にエラーが発生しました。");
+    }
+  };
+
+  // モーダルを閉じる
+  const handleClose = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -413,6 +446,15 @@ const RecipeFormExtended = () => {
           </Grid>
         </Grid>
       </form>
+            {/* モーダル */}
+            {generatedRecipe && (
+        <RecipeModal
+          open={modalOpen}
+          recipe={generatedRecipe}
+          onClose={handleClose}
+          onSave={handleSave}
+        />
+      )}
     </Box>
   );
 };
