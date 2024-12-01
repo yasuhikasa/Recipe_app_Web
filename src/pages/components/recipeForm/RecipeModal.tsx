@@ -1,20 +1,24 @@
-import React from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Modal,
-  Grid,
-} from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, Button, Modal, Grid, TextField } from "@mui/material";
 
 type RecipeModalProps = {
   open: boolean;
   recipe: string;
   onClose: () => void;
-  onSave: () => void;
+  onSave: (title: string) => void; // タイトルを渡す
 };
 
 const RecipeModal: React.FC<RecipeModalProps> = ({ open, recipe, onClose, onSave }) => {
+  const [title, setTitle] = useState<string>("");
+
+  const handleSave = () => {
+    if (!title.trim()) {
+      alert("タイトルを入力してください。");
+      return;
+    }
+    onSave(title.trim());
+  };
+
   return (
     <Modal
       open={open}
@@ -45,23 +49,27 @@ const RecipeModal: React.FC<RecipeModalProps> = ({ open, recipe, onClose, onSave
         >
           {recipe}
         </Typography>
+        <TextField
+          fullWidth
+          label="レシピタイトルを入力してください"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          variant="outlined"
+          sx={{ mb: 3 }}
+        />
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Button
               fullWidth
               variant="contained"
               sx={{ bgcolor: "#ff6347", ":hover": { bgcolor: "#e55347" } }}
-              onClick={onSave}
+              onClick={handleSave}
             >
               保存する
             </Button>
           </Grid>
           <Grid item xs={6}>
-            <Button
-              fullWidth
-              variant="outlined"
-              onClick={onClose}
-            >
+            <Button fullWidth variant="outlined" onClick={onClose}>
               保存しない
             </Button>
           </Grid>

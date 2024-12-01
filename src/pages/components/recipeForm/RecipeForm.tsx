@@ -112,10 +112,14 @@ const RecipeFormExtended = () => {
   };
 
   // レシピ保存
-  const handleSave = async () => {
+  const handleSave = async (title: string) => {
     try {
-      await axios.post("/api/save-recipe", { recipe: generatedRecipe, formData });
-      alert("レシピが保存されました！");
+      const response = await axios.post("/api/save-recipe", {
+        recipe: generatedRecipe, // レシピ詳細
+        formData,               // フォームデータ
+        title,                  // ユーザーが入力したタイトル
+      });
+      alert(response.data.message);
       setModalOpen(false);
     } catch (error) {
       console.error("Error saving recipe:", error);
