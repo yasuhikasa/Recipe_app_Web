@@ -26,33 +26,9 @@ export const effortOptions: Option[] = [
 ];
 
 
-// 目的
-export const purposeOptions: Option[] = [
-  { label: 'ダイエット中', value: 'ダイエット中' },
-  { label: 'ダイエット効果を高めたい', value: 'ダイエット効果を高めたい' },
-  { label: '筋トレ後', value: '筋トレ後' },
-  { label: '筋肉をつけたい', value: '筋肉をつけたい' },
-  { label: 'マッチョになりたい', value: 'マッチョになりたい' },
-  { label: '子供が喜ぶ', value: '子供が喜ぶ' },
-  { label: '彼氏（旦那）が喜ぶ', value: '彼氏（旦那）が喜ぶ' },
-  { label: '彼女（嫁）が喜ぶ', value: '彼女（嫁）が喜ぶ' },
-  { label: 'お弁当用（子供）', value: 'お弁当用（子供）' },
-  { label: 'お弁当用 (大人)', value: 'お弁当用 （大人）' },
-  { label: 'ピクニック', value: 'ピクニック' },
-  { label: 'アウトドア、キャンプで作りたい', value: 'アウトドア、キャンプで作りたい' },
-  { label: 'ホームパーティー', value: 'ホームパーティー' },
-  { label: 'ヘルシー志向', value: 'ヘルシー志向' },
-  { label: 'スタミナ重視', value: 'スタミナ重視' },
-  { label: 'おもてなし', value: 'おもてなし' },
-  { label: '節約料理', value: '節約料理' },
-  { label: '特別な日のごちそう', value: '特別な日のごちそう' },
-  { label: 'リラックスしたい時', value: 'リラックスしたい時' },
-  { label: '忙しい日の簡単ご飯', value: '忙しい日の簡単ご飯' },
-  { label: '季節感を取り入れたい', value: '季節感を取り入れたい' },
-];
-
 // 予算
 export const budgetOptions: Option[] = [
+  { label: "決めていない", value: "決めていない" },
   { label: "300円以下", value: "300円以下" },
   { label: "500円以下", value: "500円以下" },
   { label: "1000円以下", value: "1000円以下" },
@@ -65,34 +41,20 @@ export const budgetOptions: Option[] = [
   { label: "8000円以下", value: "8000円以下" },
   { label: "9000円以下", value: "9000円以下" },
   { label: "10000円以下", value: "10000円以下" },
-  { label: "15000円以下", value: "15000円以下" },
-  { label: "20000円以下", value: "20000円以下" },
-  { label: "30000円以下", value: "30000円以下" },
-  { label: "40000円以下", value: "40000円以下" },
-  { label: "50000円以下", value: "50000円以下" },
-  { label: "制限なし", value: "制限なし" },
 ];
 
 
 // 気分
 export const moodOptions: Option[] = [
-  { label: 'さっぱり', value: 'さっぱり' },
-  { label: 'ガッツリ', value: 'ガッツリ' },
-  { label: 'おしゃれ', value: 'おしゃれ' },
+  { label: 'さっぱり系がいい', value: 'さっぱり系がいい' },
+  { label: 'ガッツリ食べたい', value: 'ガッツリ食べたい' },
+  { label: '疲れた', value: '疲れた' },
+  { label: '寝起き', value: '寝起き' },
+  { label: 'ヘルシー志向', value: 'ヘルシー志向' },
+  { label: 'スタミナ重視', value: 'スタミナ重視' },
+  { label: 'おまかせ', value: 'おまかせ' },
 ];
 
-// 調理器具
-export const equipmentOptions = [
-  { label: '電子レンジ', value: '電子レンジ' },
-  { label: 'フライパン', value: 'フライパン' },
-  { label: 'オーブン', value: 'オーブン' },
-];
-
-// 季節感
-export const seasonOptions = [
-  { label: '夏っぽい料理', value: '夏っぽい料理' },
-  { label: '冬に温まるもの', value: '冬に温まるもの' },
-];
 
 // 食べる時間帯
 export const mealTimeOptions: Option[] = [
@@ -103,29 +65,6 @@ export const mealTimeOptions: Option[] = [
   { label: "夜食", value: "夜食" },
 ];
 
-// 国ジャンル
-export const genreOptions: Option[] = [
-  { label: "和食", value: "和食" },
-  { label: "中華", value: "中華" },
-  { label: "韓国", value: "韓国" },
-  { label: "イタリアン", value: "イタリアン" },
-  { label: "フレンチ", value: "フレンチ" },
-  { label: "アジアン", value: "アジアン" },
-  { label: "エスニック", value: "エスニック" },
-  { label: "アメリカン", value: "アメリカン" },
-];
-
-// 料理ジャンル
-export const cookingGenreOptions: Option[] = [
-  { label: "鍋物", value: "鍋物" },
-  { label: "スイーツ", value: "スイーツ" },
-  { label: "ケーキ", value: "ケーキ" },
-  { label: "煮物", value: "煮物" },
-  { label: "炒め物", value: "炒め物" },
-  { label: "揚げ物", value: "揚げ物" },
-  { label: "蒸し物", value: "蒸し物" },
-  { label: "汁物", value: "汁物" },
-];
 
 // 人数
 export const peopleOptions: Option[] = [
