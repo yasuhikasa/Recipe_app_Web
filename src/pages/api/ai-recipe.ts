@@ -56,6 +56,7 @@ const prompt = `
 
 
     // ChatCompletion API を呼び出し
+    console.log("Sending request to OpenAI API...");
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
       messages: [
@@ -66,14 +67,18 @@ const prompt = `
       temperature: 0.6,
     });
 
+    console.log("Response from OpenAI API:", response);
+
     const recipe = response.choices && response.choices.length > 0
       ? response.choices[0].message?.content?.trim()
       : null;
 
     if (!recipe) {
+      console.error("AIからのレシピが空です");
       return res.status(500).json({ message: "AIからのレシピが空です。" });
     }
 
+    console.log("Recipe generated successfully");
     res.status(200).json({ recipe });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
