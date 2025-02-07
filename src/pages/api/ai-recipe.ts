@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { OpenAI } from "openai";
+import  OpenAI  from "openai";
 
 // OpenAI API の設定
 const openai = new OpenAI({
